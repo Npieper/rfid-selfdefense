@@ -26,7 +26,7 @@ try:
         conn = sqlite3.connect('timetracking.db')
         c  = conn.cursor()
 
-        c.execute("INSERT INTO user VALUES('{}', '{}', '{}', '{}','{}','{}','{}','{}','{}','{}')".format(id, name, vorname, bday, geburtsort,nationalitaet,beruf,strasse,plz,telefon,email))
+        c.execute("INSERT INTO user VALUES('{}', '{}', '{}', '{}','{}','{}','{}','{}','{}','{}','{}')".format(id, name, vorname, bday, geburtsort,nationalitaet,beruf,strasse,plz,telefon,email))
 
         conn.commit()
         conn.close()
