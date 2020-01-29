@@ -9,7 +9,7 @@ def send_alert_mail(client):
     message = """\
     Zu haeufiges Training festgestellt
 
-    Klient {} is heute zum Training erschienen, obwohl dies seinem Paket nach nicht erlaubt ist.
+    Klient {} is heute zum Training erschienen, obwohl dies seinem/ihrem Paket nach nicht erlaubt ist.
     Bitte auf der Seite www.test.de checken.""".format(client)
 
     context = ssl.create_default_context()
