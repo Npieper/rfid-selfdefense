@@ -12,12 +12,12 @@ def calculate_week_start_date():
     print("Start: " + str(start))
     return start
 
-def is_user_allowed(package_number, number_of_trainings):
+def is_user_allowed(package_number, number_of_trainings, client):
     if package_number == 2:
         print("Package number is 2")
         if number_of_trainings > 3:
             print("WARNING: Client is not allowed to train that often!")
-            send_alert_mail()
+            send_alert_mail(client)
     elif package_number == 1:
         print("Package number is 1")
     elif package_number == 0:
@@ -40,7 +40,7 @@ try:
 
         week_start_day = calculate_week_start_date()
 
-        cursor.execute("SELECT checkIn FROM time where checkIn > '{}'".format(week_start_day))
+        cursor.execute("SELECT checkIn FROM time where checkIn > '{}' and userId = '{}'".format(week_start_day, 2))
 
         count_rows = 0        
         for x in cursor:
@@ -49,16 +49,18 @@ try:
 
         print(count_rows) 
 
-        cursor.execute("SELECT package FROM user where ChipId = '{}'".format(1))
+        cursor.execute("SELECT package, vorname, nachname FROM user where ChipId = '{}'".format(2))
         
         package_number = -1
+        client_name = ""
         for y in cursor:
             package_number = y.package
+            client_name = y.vorname + " " + y.nachname
             
-        is_user_allowed(package_number, count_rows)
+        is_user_allowed(package_number, count_rows, client_name)
            
         # Have a look at the timezones, does not make sense right now    
-        mySql_insert_query = "INSERT INTO time (userId, checkIn) VALUES ('{}', '{}')".format(1, datetime.now() + timedelta(hours=-1))
+        mySql_insert_query = "INSERT INTO time (userId, checkIn) VALUES ('{}', '{}')".format(2, datetime.now() + timedelta(hours=-1))
         result = cursor.execute(mySql_insert_query)
         connection.commit()
         print("Record inserted successfully into user table")

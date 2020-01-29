@@ -1,6 +1,6 @@
 import smtplib, ssl
 
-def send_alert_mail():
+def send_alert_mail(client):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
     sender_email = "kravmaga.lev.email.alarm@gmail.com"  # Enter your address
@@ -9,8 +9,8 @@ def send_alert_mail():
     message = """\
     Zu haeufiges Training festgestellt
 
-    Klient testName is heute zum Training erschienen, obwohl dies seinem Paket nach nicht erlaubt ist.
-    Bitte auf der Seite www.test.de checken."""
+    Klient {} is heute zum Training erschienen, obwohl dies seinem Paket nach nicht erlaubt ist.
+    Bitte auf der Seite www.test.de checken.""".format(client)
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
