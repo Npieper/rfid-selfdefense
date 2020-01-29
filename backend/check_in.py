@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import datetime
 from datetime import datetime, timedelta
-from MailService import send_alert_mail
+from mail_service import send_alert_mail
 
 def calculate_week_start_date():
     today = datetime.now().date()

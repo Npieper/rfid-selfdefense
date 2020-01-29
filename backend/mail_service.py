@@ -7,9 +7,10 @@ def send_alert_mail():
     receiver_email = "pieper.niklas.gm@gmail.com"  # Enter receiver address
     password = input("Type your password and press enter: ")
     message = """\
-    Subject: Hi there
+    Zu haeufiges Training festgestellt
 
-    This message is sent from Python."""
+    Klient testName is heute zum Training erschienen, obwohl dies seinem Paket nach nicht erlaubt ist.
+    Bitte auf der Seite www.test.de checken."""
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
