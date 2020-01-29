@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import datetime
 from datetime import datetime, timedelta
+from MailService import send_alert_mail
 
 def calculate_week_start_date():
     today = datetime.now().date()
@@ -16,6 +17,7 @@ def is_user_allowed(package_number, number_of_trainings):
         print("Package number is 2")
         if number_of_trainings > 3:
             print("WARNING: Client is not allowed to train that often!")
+            send_alert_mail()
     elif package_number == 1:
         print("Package number is 1")
     elif package_number == 0:
